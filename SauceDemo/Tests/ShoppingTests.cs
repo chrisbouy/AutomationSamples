@@ -4,6 +4,7 @@ using SauceDemo.PageObjects;
 using SauceDemo.Tests;
 using System.Xml.Linq;
 using FluentAssertions;
+using OpenQA.Selenium.DevTools.V118.Page;
 
 namespace SauceDemo.Tests
 {
@@ -11,28 +12,39 @@ namespace SauceDemo.Tests
     {
         private ProductsPage _ProductsPage { get; set; }
         private HomePage _HomePage { get; set; }
-        [TestCase]
-        public void AddProducts()
+
+       private static IEnumerable<TestCaseData> _Products()
         {
-            _ProductsPage = new ProductsPage(Driver); 
+            yield return new TestCaseData(new List<string> { "Onesie" });
+            yield return new TestCaseData(new List<string> { "Onesie", "Backpack" }); 
+        }
+
+        [Test, TestCaseSource("_Products")]
+        public void AddProducts(List<string> products)
+        {
+            int cnt = 0;
+            _ProductsPage = new ProductsPage(Driver);
             _HomePage = new HomePage(Driver);
-            _HomePage.Goto("");
+            //_HomePage.Goto("");
             _HomePage.BypassLogin();
             _ProductsPage.gotoProductsPage();
             var original_count = _ProductsPage.GetNumberOfItemsInCart();
-            _ProductsPage.AddToCart("Onesie");
-            //assert cart icon increased by one
+            foreach (var product in products) 
+            { 
+                _ProductsPage.AddToCart(product);
+                cnt++;
+            }
             var new_count = _ProductsPage.GetNumberOfItemsInCart();
-            new_count.Should().Be(++original_count);
-
-
-            //assert item's 'add' button now says 'remove'
-
-
+            new_count.Should().Be(cnt);
         }
 
         public void RemoveProducts()
         {
+        }
+
+        public void Checkout_HappyPath()
+        {
+
         }
     }
 }
