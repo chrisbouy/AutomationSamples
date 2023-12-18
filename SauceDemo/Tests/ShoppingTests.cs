@@ -25,7 +25,6 @@ namespace SauceDemo.Tests
             int cnt = 0;
             _ProductsPage = new ProductsPage(Driver);
             _HomePage = new HomePage(Driver);
-            //_HomePage.Goto("");
             _HomePage.BypassLogin();
             _ProductsPage.gotoProductsPage();
             var original_count = _ProductsPage.GetNumberOfItemsInCart();
@@ -44,6 +43,9 @@ namespace SauceDemo.Tests
 
         public void Checkout_HappyPath()
         {
+            _HomePage = new HomePage(Driver);
+            _HomePage.BypassLogin();
+            //_ProductsPage.gotoCheckoutPage();
 
         }
     }

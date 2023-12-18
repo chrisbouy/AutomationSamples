@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SauceDemo.PageObjects
 {
-    internal class CheckoutPage
+    public class CartPage
     {
     }
 }
