@@ -36,7 +36,7 @@
 	
 		    public class TradingVolumeTests<TWebDriver> : TestBase<TWebDriver> where TWebDriver : IWebDriver, new()
 	
-Config - a config file is built dynamically from a json body in the output directory
+	Config - a config file is built dynamically from a json body in the output directory
+	
+	Cookies - cookies are saved to file and reloaded to bypass login. In the setup hook of the test base, cookies are loaded from this file.  
 
-Cookies - cookies are saved to file and reloaded to bypass login. In the setup hook of the test base, cookies are loaded from this file.  
-![image](https://github.com/chrisbouy/CodingExcercises/assets/100810443/8e9d0f83-1ca2-43d5-a129-6c7f91e16667)
