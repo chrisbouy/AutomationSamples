@@ -37,16 +37,10 @@ namespace SauceDemo.Tests
         {
             _ProductsPage = new ProductsPage(Driver);
             _HomePage = new HomePage(Driver);            
-
-            _HomePage.BypassLogin();
-            _ProductsPage.gotoProductsPage();            
-            int cnt = 0;
-            foreach (var product in products)
-            {
-                _ProductsPage.AddToCart(product);
-                cnt++;
-            }
-            _ProductsPage.GetNumberOfItemsInCart().Should().Be(cnt);
+            _HomePage.BypassLoginWithCookie();
+            _ProductsPage.gotoProductsPage();
+            _ProductsPage.AddAllToCart(products);
+            _ProductsPage.GetNumberOfItemsInCart().Should().Be(products.Count);
 
             //remove products to reset state
             _ProductsPage.RemoveAllFromCart(products);
@@ -59,8 +53,8 @@ namespace SauceDemo.Tests
             _ProductsPage = new ProductsPage(Driver);
             _CheckoutPage1 = new CheckoutPage1(Driver);
 
-            _HomePage.BypassLogin();
-            _ProductsPage.InjectProductsIntoCart();
+            _HomePage.BypassLoginWithCookie();
+            _ProductsPage.InjectProductsIntoCartWithJavaScript();
             _CheckoutPage1.gotoCheckoutPage1();
             _CheckoutPage1.EnterInfo("Chris", "Bouy", "12345");
         }
@@ -72,9 +66,10 @@ namespace SauceDemo.Tests
             _ProductsPage = new ProductsPage(Driver);
             _CheckoutPage2 = new CheckoutPage2(Driver);
 
-            _HomePage.BypassLogin(); 
-            _ProductsPage.InjectProductsIntoCart();
+            _HomePage.BypassLoginWithCookie(); 
+            _ProductsPage.InjectProductsIntoCartWithJavaScript();
             _CheckoutPage2.gotoCheckoutPage2();
+            _CheckoutPage2.ConfirmOrderInfo();
         }
     }
 }
