@@ -16,7 +16,6 @@ namespace SauceDemo.PageObjects
 
         private List<IWebElement> DIV_products => HelperMethods.FindElementsWithWait(_driver, By.CssSelector(".inventory_item"), System.TimeSpan.FromSeconds(10)).ToList();
         private IWebElement DIV_cartIcon => HelperMethods.FindElementWithWait_Clickable(_driver, By.ClassName("shopping_cart_link"), System.TimeSpan.FromSeconds(10));
-        //private IWebElement DIV_cartProductCounter => HelperMethods.FindElementWithWait_Clickable(_driver, By.ClassName("shopping_cart_badge"), System.TimeSpan.FromSeconds(10));
         private List<IWebElement> DIV_cartProductCounter => DIV_cartIcon.FindElements(By.ClassName("shopping_cart_badge")).ToList();
 
         public void gotoProductsPage()
@@ -37,8 +36,10 @@ namespace SauceDemo.PageObjects
             }
             //if found, click 'add'
         }
-        public void RemoveAllFromCart(List<string> products)
+       
+        public int AddAllToCart(List<string> products)
         {
+            int cnt = 0;
             foreach (var p in products)
             {
                 foreach (var item in DIV_products)
@@ -48,6 +49,24 @@ namespace SauceDemo.PageObjects
                     {
                         var addToCartButton = item.FindElement(By.CssSelector(".btn_inventory"));
                         addToCartButton.Click();
+                        cnt++;
+                    }
+                }
+            }
+            return cnt;
+        }
+      
+        public void RemoveAllFromCart(List<string> products)
+        {
+            foreach (var p in products)
+            {
+                foreach (var item in DIV_products)
+                {
+                    var productName = item.FindElement(By.ClassName("inventory_item_name")).Text;
+                    if (productName.Contains(p))
+                    {
+                        var removeFromCartButton = item.FindElement(By.CssSelector(".btn_inventory"));
+                        removeFromCartButton.Click();
                     }
                 }
             }
@@ -61,7 +80,7 @@ namespace SauceDemo.PageObjects
                 return int.Parse(DIV_cartProductCounter[0].Text);
         }
 
-        public void InjectProductsIntoCart()
+        public void InjectProductsIntoCartWithJavaScript()
         {
             ((IJavaScriptExecutor)_driver).ExecuteScript(
                 "window.sessionStorage.setItem('session-username', 'standard-user')");

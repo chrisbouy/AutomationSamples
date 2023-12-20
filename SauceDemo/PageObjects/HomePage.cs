@@ -33,11 +33,9 @@ namespace SauceDemo.PageObjects
             TB_pw.Submit();
         }
 
-        public void BypassLogin() {
-            ((IJavaScriptExecutor)_driver).ExecuteScript("window.sessionStorage.setItem('session-username', 'standard_user')");
+        public void BypassLoginWithCookie() {
             OpenQA.Selenium.Cookie ck = new OpenQA.Selenium.Cookie("session-username", "standard_user");
             _driver.Manage().Cookies.AddCookie(ck);
-            _driver.Navigate().Refresh();
         }
         public void GoToRegistrationPage()
         {
