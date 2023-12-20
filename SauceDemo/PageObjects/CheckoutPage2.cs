@@ -27,6 +27,5 @@ namespace SauceDemo.PageObjects
         {
             Goto("checkout-step-two.html");
         }
-
     }
 }
