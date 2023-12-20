@@ -53,41 +53,6 @@ namespace SauceDemo.Tests
                 Driver.Manage().Window.Maximize();
             }
             Driver.Navigate().GoToUrl(_baseUrl);
-            ////read cookies from file if it exists
-            //Driver.Manage().Cookies.DeleteAllCookies();
-            //try
-            //{
-            //    string filePath = "Cookies.data";
-            //    if (File.Exists(filePath))
-            //    {
-            //        using (StreamReader sr = File.OpenText(filePath))
-            //        {
-            //            string strLine;
-            //            while ((strLine = sr.ReadLine()) != null)
-            //            {
-            //                string[] cookieInfo = strLine.Split(';');
-            //                string name = cookieInfo[0];
-            //                string value = cookieInfo[1];
-            //                string domain = cookieInfo[2];
-            //                string path = cookieInfo[3];
-            //                DateTime? expiry = null;
-            //                OpenQA.Selenium.Cookie ck = new OpenQA.Selenium.Cookie(name, value);
-            //                Console.WriteLine(ck);
-            //                Driver.Manage().Cookies.AddCookie(ck);
-            //            }
-            //        }
-            //        Console.WriteLine("Cookies loaded from file successfully.");
-            //    }
-            //    else
-            //    {
-            //        Console.WriteLine("Cookies file not found.");
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    Console.WriteLine($"Exception occurred: {ex.Message}");
-            //    Console.WriteLine(ex.StackTrace);
-            //}
         }
 
         [TearDown]
