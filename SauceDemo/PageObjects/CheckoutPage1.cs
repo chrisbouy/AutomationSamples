@@ -15,8 +15,8 @@ namespace SauceDemo.PageObjects
         }
 
         // I'm doing it this way to show a quick way to get all the inputs as webelements.
-        IList<IWebElement> inputElements => HelperMethods.FindElementsWithWait(_driver,By.ClassName("form_group"),System.TimeSpan.FromSeconds(10));
-        private IWebElement BUT_continue => HelperMethods.FindElementWithWait_Clickable(_driver, By.XPath("//div[@data-test='continue']"), System.TimeSpan.FromSeconds(10));
+        IList<IWebElement> inputElements => HelperMethods.FindElementsWithWait(_driver,By.ClassName("form_input"),System.TimeSpan.FromSeconds(10));
+        private IWebElement BUT_continue => HelperMethods.FindElementWithWait_Clickable(_driver, By.XPath("//*[@data-test='continue']"), System.TimeSpan.FromSeconds(10));
 
         //I'm then going to populate the inputs from a list of data in the test
         public void EnterInfo(string f, string l, string zip)

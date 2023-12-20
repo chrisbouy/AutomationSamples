@@ -29,7 +29,6 @@ namespace SauceDemo.PageObjects
             foreach (var item in DIV_products)
             {
                 var productName = item.FindElement(By.ClassName("inventory_item_name")).Text;
-                Thread.Sleep(1000);
                 if (productName.Contains(product))
                 {
                     var addToCartButton = item.FindElement(By.CssSelector(".btn_inventory"));
@@ -38,8 +37,20 @@ namespace SauceDemo.PageObjects
             }
             //if found, click 'add'
         }
-        public void RemoveFromCart()
+        public void RemoveAllFromCart(List<string> products)
         {
+            foreach (var p in products)
+            {
+                foreach (var item in DIV_products)
+                {
+                    var productName = item.FindElement(By.ClassName("inventory_item_name")).Text;
+                    if (productName.Contains(p))
+                    {
+                        var addToCartButton = item.FindElement(By.CssSelector(".btn_inventory"));
+                        addToCartButton.Click();
+                    }
+                }
+            }
         }
 
         public int GetNumberOfItemsInCart()
@@ -49,5 +60,15 @@ namespace SauceDemo.PageObjects
             else
                 return int.Parse(DIV_cartProductCounter[0].Text);
         }
+
+        public void InjectProductsIntoCart()
+        {
+            ((IJavaScriptExecutor)_driver).ExecuteScript(
+                "window.sessionStorage.setItem('session-username', 'standard-user')");
+            ((IJavaScriptExecutor)_driver).ExecuteScript("window.localStorage.setItem('cart-contents', '[4]')");
+            _driver.Navigate().Refresh();
+            return;
+        }
     }
 }
+
