@@ -1,11 +1,10 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
-using SauceDemo.PageObjects;
-using SauceDemo.Tests;
 using System.Xml.Linq;
 using FluentAssertions;
 using OpenQA.Selenium.DevTools.V118.Page;
 using OpenQA.Selenium.Support.UI;
+using SeleniumAutomation.PageObjects;
 
 /*-----------------ATOMIC TESTS EXAMPLE---------------
 INSTEAD OF ONE TEST THAT GOES THROUGH THE ENTIRE CHECKOUT PROCESS,
@@ -18,7 +17,7 @@ THERE ARE MANY ADVANTAGES TO DOING IT THIS WAY.
 -DECREASE FLAKINESS (decreases the number of possible breaking points)
 */
 
-namespace SauceDemo.Tests
+namespace SeleniumAutomation.Tests
 {
     public class ShoppingTests<TWebDriver> : TestBase<TWebDriver> where TWebDriver : IWebDriver, new()
     {
@@ -43,8 +42,8 @@ namespace SauceDemo.Tests
         public void AddProducts(List<string> products)
         {
             _ProductsPage = new ProductsPage(Driver);
-            _HomePage = new HomePage(Driver);   
-            
+            _HomePage = new HomePage(Driver);
+
             _HomePage.BypassLoginWithCookie();
             _ProductsPage.gotoProductsPage();
             _ProductsPage.AddAllToCart(products);
@@ -87,7 +86,7 @@ namespace SauceDemo.Tests
             _CheckoutPage2 = new CheckoutPage2(Driver);
             _CheckoutCompletePage = new CheckoutCompletePage(Driver);
 
-            _HomePage.BypassLoginWithCookie(); 
+            _HomePage.BypassLoginWithCookie();
             _ProductsPage.InjectProductsIntoCartWithJavaScript();
             _CheckoutPage2.gotoCheckoutPage2();
             //todo:assert everything looks good

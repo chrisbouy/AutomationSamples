@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SauceDemo.PageObjects
+namespace SeleniumAutomation.PageObjects
 {
     public class CheckoutPage2 : BasePage
     {
@@ -15,7 +15,7 @@ namespace SauceDemo.PageObjects
         }
 
         // I'm doing it this way to show a quick way to get all the inputs as webelements.
-        private IWebElement BUT_finish => HelperMethods.FindElementWithWait_Clickable(_driver, By.XPath("//*[@data-test='finish']"), System.TimeSpan.FromSeconds(10));
+        private IWebElement BUT_finish => HelperMethods.FindElementWithWait_Clickable(_driver, By.XPath("//*[@data-test='finish']"), TimeSpan.FromSeconds(10));
 
         //I'm then going to populate the inputs from a list of data in the test
         public void ConfirmOrderInfo()

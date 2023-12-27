@@ -2,7 +2,7 @@
 using System;
 using System.Linq;
 
-namespace SauceDemo
+namespace SeleniumAutomation
 {
     public static class ConfigurationSettingsUtility
     {
