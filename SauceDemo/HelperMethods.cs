@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 
-namespace SauceDemo
+namespace SeleniumAutomation
 {
     public static class HelperMethods
     {
@@ -36,7 +36,7 @@ namespace SauceDemo
             }
             catch (Exception e)
             {
-                throw (e);
+                throw e;
             }
             return localpath;
         }
@@ -62,7 +62,7 @@ namespace SauceDemo
                 WebDriverWait wait = new WebDriverWait(webDriver, timeOut);
                 return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(by));
             }
-            catch (OpenQA.Selenium.NoSuchElementException)
+            catch (NoSuchElementException)
             {
                 return null;
             }

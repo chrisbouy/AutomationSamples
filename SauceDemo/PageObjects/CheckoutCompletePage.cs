@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SauceDemo.PageObjects
+namespace SeleniumAutomation.PageObjects
 {
     public class CheckoutCompletePage : BasePage
     {
@@ -14,10 +14,8 @@ namespace SauceDemo.PageObjects
         {
         }
 
-        // I'm doing it this way to show a quick way to get all the inputs as webelements.
-        private IWebElement LBL_message => HelperMethods.FindElementWithWait_Viewable(_driver, By.ClassName("complete-text"), System.TimeSpan.FromSeconds(10));
+        private IWebElement LBL_message => HelperMethods.FindElementWithWait_Viewable(_driver, By.ClassName("complete-text"), TimeSpan.FromSeconds(10));
 
-        //I'm then going to populate the inputs from a list of data in the test
         public string GetMessage()
         {
             return LBL_message.Text;

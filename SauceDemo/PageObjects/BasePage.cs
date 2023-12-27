@@ -1,12 +1,12 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
-using SauceDemo;
+using SeleniumAutomation;
 using System;
 using System.Collections.ObjectModel;
 using System.Threading;
 
-namespace SauceDemo.PageObjects
+namespace SeleniumAutomation.PageObjects
 {
     public class BasePage
     {
@@ -49,7 +49,7 @@ namespace SauceDemo.PageObjects
         public void Goto(string url, bool useBaseUrl = true)
         {
             if (useBaseUrl)
-            _driver.Navigate().GoToUrl(_baseUrl + "/" + url);
+                _driver.Navigate().GoToUrl(_baseUrl + "/" + url);
 
             else
                 _driver.Navigate().GoToUrl(url);
@@ -58,7 +58,7 @@ namespace SauceDemo.PageObjects
         protected void WaitForJS()
         {
             WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
-            wait.Until(d => (bool)((OpenQA.Selenium.IJavaScriptExecutor)_driver).ExecuteScript("return (document.readyState == 'complete' && jQuery.active == 0)"));
+            wait.Until(d => (bool)((IJavaScriptExecutor)_driver).ExecuteScript("return (document.readyState == 'complete' && jQuery.active == 0)"));
         }
     }
 }

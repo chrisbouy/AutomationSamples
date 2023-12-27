@@ -1,13 +1,11 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
-using SauceDemo;
-using SauceDemo.PageObjects;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 
-namespace SauceDemo.PageObjects
+namespace SeleniumAutomation.PageObjects
 {
     public class HomePage : BasePage
     {
@@ -15,10 +13,10 @@ namespace SauceDemo.PageObjects
         {
         }
 
-        private IWebElement TB_name => HelperMethods.FindElementWithWait_Clickable(_driver, By.Name("username"), System.TimeSpan.FromSeconds(10));
-        private IWebElement TB_pw => HelperMethods.FindElementWithWait_Clickable(_driver, By.Name("password"), System.TimeSpan.FromSeconds(10));
-        private IWebElement BUT_bill_pay => HelperMethods.FindElementWithWait_Clickable(_driver, By.XPath("//li[a[text()='Bill Pay']]"), System.TimeSpan.FromSeconds(10));
-        private IWebElement BUT_register => HelperMethods.FindElementWithWait_Clickable(_driver, By.LinkText("Register"), System.TimeSpan.FromSeconds(10));
+        private IWebElement TB_name => HelperMethods.FindElementWithWait_Clickable(_driver, By.Name("username"), TimeSpan.FromSeconds(10));
+        private IWebElement TB_pw => HelperMethods.FindElementWithWait_Clickable(_driver, By.Name("password"), TimeSpan.FromSeconds(10));
+        private IWebElement BUT_bill_pay => HelperMethods.FindElementWithWait_Clickable(_driver, By.XPath("//li[a[text()='Bill Pay']]"), TimeSpan.FromSeconds(10));
+        private IWebElement BUT_register => HelperMethods.FindElementWithWait_Clickable(_driver, By.LinkText("Register"), TimeSpan.FromSeconds(10));
 
         public void gotoHomePage()
         {
@@ -33,8 +31,9 @@ namespace SauceDemo.PageObjects
             TB_pw.Submit();
         }
 
-        public void BypassLoginWithCookie() {
-            OpenQA.Selenium.Cookie ck = new OpenQA.Selenium.Cookie("session-username", "standard_user");
+        public void BypassLoginWithCookie()
+        {
+            Cookie ck = new Cookie("session-username", "standard_user");
             _driver.Manage().Cookies.AddCookie(ck);
         }
         public void GoToRegistrationPage()

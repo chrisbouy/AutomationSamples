@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SauceDemo.PageObjects
+namespace SeleniumAutomation.PageObjects
 {
     public class ProductsPage : BasePage
     {
@@ -14,8 +14,8 @@ namespace SauceDemo.PageObjects
         {
         }
 
-        private List<IWebElement> DIV_products => HelperMethods.FindElementsWithWait(_driver, By.CssSelector(".inventory_item"), System.TimeSpan.FromSeconds(10)).ToList();
-        private IWebElement DIV_cartIcon => HelperMethods.FindElementWithWait_Clickable(_driver, By.ClassName("shopping_cart_link"), System.TimeSpan.FromSeconds(10));
+        private List<IWebElement> DIV_products => HelperMethods.FindElementsWithWait(_driver, By.CssSelector(".inventory_item"), TimeSpan.FromSeconds(10)).ToList();
+        private IWebElement DIV_cartIcon => HelperMethods.FindElementWithWait_Clickable(_driver, By.ClassName("shopping_cart_link"), TimeSpan.FromSeconds(10));
         private List<IWebElement> DIV_cartProductCounter => DIV_cartIcon.FindElements(By.ClassName("shopping_cart_badge")).ToList();
 
         public void gotoProductsPage()
@@ -36,7 +36,7 @@ namespace SauceDemo.PageObjects
             }
             //if found, click 'add'
         }
-       
+
         public int AddAllToCart(List<string> products)
         {
             int cnt = 0;
@@ -55,7 +55,7 @@ namespace SauceDemo.PageObjects
             }
             return cnt;
         }
-      
+
         public void RemoveAllFromCart(List<string> products)
         {
             foreach (var p in products)

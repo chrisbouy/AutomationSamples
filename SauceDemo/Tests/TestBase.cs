@@ -5,7 +5,7 @@ using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.UI;
-using SauceDemo.PageObjects;
+using SeleniumAutomation.PageObjects;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -19,8 +19,9 @@ using RestSharp.Authenticators;
 using System.Net;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
+using SeleniumAutomation;
 
-namespace SauceDemo.Tests
+namespace SeleniumAutomation.Tests
 {
     [TestFixture(typeof(ChromeDriver))]
     [TestFixture(typeof(FirefoxDriver))]
