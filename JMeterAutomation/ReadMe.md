@@ -7,7 +7,7 @@
             and use it in another request. Here, the variable is the username.  This assumes that both usernames have
             the same password, so it's not a real-world example.
       Basic-JSR223 PreProcessor:
-            uses Java to encode the credentials.
+            uses Javascript to encode the credentials.
       Basic - base64Encode function:
             uses a built-in JMeter function to encode the credentials.
       Bearer Token:
@@ -15,7 +15,7 @@
       Digest-HTTP Authorization Manager:
             uses built-in Digest mechanism in Authorization Manager.
       Digest-Custom:
-            uses Java to build digest
+            uses Javascript to build digest
             
       ...more test being created
       
