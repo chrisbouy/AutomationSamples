@@ -36,7 +36,7 @@ namespace SeleniumAutomation
             }
             catch (Exception e)
             {
-                throw e;
+                Console.WriteLine("Error capturing screenshot: " + e.Message);
             }
             return localpath;
         }
