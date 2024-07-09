@@ -76,6 +76,7 @@ namespace SeleniumAutomation.Tests
         /*
          * Given: user is on checkout page 2
          * When: user verifies info and clicks finish
+         * 
          * Then: a 'success' message is displayed
          */
         [Test]

@@ -22,13 +22,14 @@ namespace SeleniumAutomation.PageObjects
         {
             get
             {
-                string _url = string.Empty;
                 try
                 {
-                    _url = _driver.Url.ToLower();
+                    return _driver.Url.ToLower();
                 }
-                catch { }
-                return _url;
+                catch (Exception ex)
+                {
+                    return string.Empty;
+                }
             }
         }
 
@@ -36,23 +37,21 @@ namespace SeleniumAutomation.PageObjects
         {
             get
             {
-                string _pageTitle = string.Empty;
                 try
                 {
-                    _pageTitle = _driver.Title.ToLower();
+                    return _driver.Title.ToLower();
                 }
-                catch { }
-                return _pageTitle;
+                catch (Exception ex)
+                {
+                    return string.Empty;
+                }
             }
         }
 
         public void Goto(string url, bool useBaseUrl = true)
         {
-            if (useBaseUrl)
-                _driver.Navigate().GoToUrl(_baseUrl + "/" + url);
-
-            else
-                _driver.Navigate().GoToUrl(url);
+            string navigateUrl = useBaseUrl ? _baseUrl + "/" + url : url;
+            _driver.Navigate().GoToUrl(navigateUrl);
         }
 
         protected void WaitForJS()

@@ -28,7 +28,6 @@ namespace SeleniumAutomation.Tests
     public class TestBase<TWebDriver> where TWebDriver : IWebDriver, new()
     {
         public IWebDriver Driver { get; set; }
-        public string customeraccount { get; set; }
         private string _baseUrl => ConfigurationSettingsUtility.BaseUrl;
 
         [OneTimeSetUp]
@@ -39,27 +38,41 @@ namespace SeleniumAutomation.Tests
         [SetUp]
         public void Setup()
         {
-            if (typeof(TWebDriver).Name == "ChromeDriver")
+            try
+            {
+                Driver = InitializeDriver(typeof(TWebDriver));
+                Driver.Navigate().GoToUrl(_baseUrl);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception
+                Console.WriteLine($"Error during setup: {ex.Message}");
+                throw;
+            }
+        }
+
+        private IWebDriver InitializeDriver(Type driverType)
+        {
+            if (driverType == typeof(ChromeDriver))
             {
                 var options = new ChromeOptions();
                 options.AddArgument("start-maximized");
-                Driver = new ChromeDriver(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), options);
-                //Driver = new RemoteWebDriver(new Uri("http://localhost:5566/wd/hub"), options.ToCapabilities(), TimeSpan.FromSeconds(600));
+                return new ChromeDriver(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), options);
             }
-            else if (typeof(TWebDriver).Name == "FirefoxDriver")
+            else if (driverType == typeof(FirefoxDriver))
             {
-                FirefoxOptions options = new FirefoxOptions();
-                Driver = new FirefoxDriver(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), options);
-                //Driver = new RemoteWebDriver(new Uri("http://localhost:5577/wd/hub"), options.ToCapabilities(), TimeSpan.FromSeconds(600));
-                Driver.Manage().Window.Maximize();
+                var options = new FirefoxOptions();
+                var driver = new FirefoxDriver(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), options);
+                driver.Manage().Window.Maximize();
+                return driver;
             }
-            Driver.Navigate().GoToUrl(_baseUrl);
+            // Add other browser drivers initialization as needed
+            throw new NotSupportedException($"Driver type '{driverType.Name}' is not supported.");
         }
-
         [TearDown]
         public void AfterTest()
         {
-            Driver.Quit();
+            Driver?.Quit();
         }
 
         [OneTimeTearDown]
