@@ -29,16 +29,20 @@ class productspage(basepage):
     def div_cart_product_counter(self):
         self.wait_for_page_to_load()
         return self.div_cart_icon.find_elements(By.CLASS_NAME, "shopping_cart_badge") if self.div_cart_icon else []
+   
     def goto_products_page(self):
-        #self.wait_for_page_to_load()
         self.goto("inventory.html")
+        self.wait_for_page_to_load()
+        
     def add_to_cart(self, product: str):
         for item in self.div_products:
             product_name = item.find_element(By.CLASS_NAME, "inventory_item_name").text
             if product.lower() in product_name.lower():
                 add_to_cart_button = item.find_element(By.CSS_SELECTOR, ".btn_inventory")
                 add_to_cart_button.click()
+   
     def add_all_to_cart(self, products: list):
+        self.wait_for_page_to_load()
         cnt = 0
         for p in products:
             for item in self.div_products:
@@ -48,13 +52,16 @@ class productspage(basepage):
                     add_to_cart_button.click()
                     cnt += 1
         return cnt
+    
     def remove_all_from_cart(self, products: list):
+        self.wait_for_page_to_load()
         for p in products:
             for item in self.div_products:
                 product_name = item.find_element(By.CLASS_NAME, "inventory_item_name").text
                 if product_name.lower() == p.lower():
                     remove_from_cart_button = item.find_element(By.CSS_SELECTOR, ".btn_inventory")
                     remove_from_cart_button.click()
+                    
     def get_number_of_items_in_cart(self):
         return int(self.div_cart_product_counter[0].text) if self.div_cart_product_counter else 0
 

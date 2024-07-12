@@ -26,8 +26,14 @@ class homepage(basepage):
 
     def goto_home_page(self):
         self.goto("")
-        time.sleep(3)
+        self.wait_for_page_to_load()
 
+    def wait_for_page_to_load(self):
+        # Example wait for an element that indicates the page is loaded
+        WebDriverWait(self._driver, 20).until(
+            EC.presence_of_element_located((By.XPATH, "//*[@data-test='login-button']"))
+        )
+        
     def login(self, name, pw):
         self.TB_name.send_keys(name)
         self.TB_pw.send_keys(pw)
