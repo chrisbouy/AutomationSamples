@@ -1,7 +1,6 @@
 import os
 import json
 
-
 class configsettings:
     @staticmethod
     def _init_configuration():
@@ -29,7 +28,6 @@ class configsettings:
     def get_base_url():
         config = configsettings._init_configuration()
         return config.get("BaseUrl")
-
 
 # Usage
 try:

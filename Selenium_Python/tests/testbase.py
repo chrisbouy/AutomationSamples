@@ -1,3 +1,4 @@
+import json
 import unittest
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -14,18 +15,27 @@ from pages.checkoutpage2 import checkoutpage2
 from pages.checkoutcompletepage import checkoutcompletepage
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
+from configsettings import configsettings
 
 class testbase(unittest.TestCase):
     def setUp(self):
-       #  self.driver = webdriver.Chrome(ChromeDriverManager().install())
-       # driver.implicitly_wait(10)
-       #  self.driver.maximize_window()
+        # with open("../appsettings.test.json", "r") as f:
+        #     self.config = json.load(f)
 
         options = Options()
-        options.add_argument("--start-maximized")  # Example option
+        options.add_argument("--start-maximized")
         service = Service(ChromeDriverManager().install())
         self.driver = webdriver.Chrome(service=service, options=options)
-        self.driver.implicitly_wait(20)
+        self.driver.implicitly_wait(10)  # Implicit wait
+
+        self.config = configsettings._init_configuration()
+        self.base_url = self.config["BaseUrl"]
+        print(f"Base URL in setUp: {self.base_url}")
+
+        if not self.base_url.startswith("http"):
+            raise ValueError(f"Invalid URL format: {self.base_url}")
+
+        self.driver.get(self.base_url)
     def tearDown(self):
         self.driver.quit()
 

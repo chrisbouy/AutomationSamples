@@ -13,6 +13,7 @@ from selenium.webdriver.common.keys import Keys
 from helper import helper
 from pages.basepage import basepage
 from pages.productspage import productspage
+from pages.homepage import homepage
 from pages.checkoutpage1 import checkoutpage1
 from pages.checkoutpage2 import checkoutpage2
 from pages.checkoutcompletepage import checkoutcompletepage
@@ -22,9 +23,10 @@ class shoppingtests(testbase):
     def setUp(self):
         super().setUp()
         self._productspage = productspage(self.driver)
-        self._checkoutpage1 = checkoutpage1(self.driver)
-        self._checkoutpage2 = checkoutpage2(self.driver)
-        self._checkoutcompletepage = checkoutcompletepage(self.driver)
+        self._homepage = homepage(self.driver)
+        #self._checkoutpage1 = checkoutpage1(self.driver)
+        #self._checkoutpage2 = checkoutpage2(self.driver)
+        #self._checkoutcompletepage = checkoutcompletepage(self.driver)
 
     def _products(self):
         return [
@@ -43,7 +45,6 @@ class shoppingtests(testbase):
                 # remove products to reset state
                 self._productspage.remove_all_from_cart(products)
 
-    def test_test(self):
 
     def test_enter_checkout_info_happy_path(self):
         self._homepage.bypass_login_with_cookie()

@@ -24,7 +24,8 @@ class basepage:
             return ''
 
     def goto(self, url, use_base_url=True):
-        navigate_url = f"{self._base_url}/{url}" if use_base_url else url
+        #navigate_url = f"{self._base_url}/{url}" if use_base_url else url
+        navigate_url = f"https://www.saucedemo.com/{url}" if use_base_url else url
         self._driver.get(navigate_url)
 
     def wait_for_js(self):
