@@ -10,15 +10,15 @@ ChromeDriver or FirefoxDriver installed and on your system path
 Running the Tests  
 Clone the repo:  
 git clone https://github.com/chrisbouy/AutomationSamples.git  
-cd AutomationSamples/SeleniumProject  
-    To clone just this `Selenium_CSharp` folder without downloading the entire repository:
-    ```bash
-    git clone --filter=blob:none --no-checkout https://github.com/chrisbouy/AutomationSamples.git
-    cd AutomationSamples
-    git sparse-checkout init --cone
-    git sparse-checkout set Selenium_CSharp
-
-Restore packages:  
+cd AutomationSamples/SeleniumProject   
+    To clone just this `Selenium_CSharp` folder without downloading the entire repository:  
+    ```bash  
+    git clone --filter=blob:none --no-checkout https://github.com/chrisbouy/AutomationSamples.git  
+    cd AutomationSamples  
+    git sparse-checkout init --cone  
+    git sparse-checkout set Selenium_CSharp  
+  
+Restore packages:    
 dotnet restore  
   
 Run the tests:  
