@@ -1,8 +1,5 @@
 Selenium Automation Framework (C#)
-
-This is a Selenium-based test automation framework I built from scratch using C#. It demonstrates flexible, maintainable, and reusable test structures using page objects, lazy locators, cookie handling, and parameterized WebDriver support.
-
-
+This test project was created against https://www.saucedemo.com/, a testing website developed by Sauce Labs.  This is a Selenium-based test automation framework I built in C#. It demonstrates flexible, maintainable, and reusable test structures using page objects, lazy locators, cookie handling, and parameterized WebDriver support.
 
 🔧 Getting Started
 
@@ -21,10 +18,7 @@ dotnet restore
 Run the tests:
 dotnet test
 
-
-
 ✅ Features
-
 Generic TestBase: Easily run tests against different browsers using generics and [TestFixture] attributes.
 Lazy-loaded Locators: Elements are located only when needed, reducing flakiness and improving performance.
 Built-in Wait Helpers: Wrapped locator logic includes WebDriverWait for reliability.
@@ -34,7 +28,6 @@ Configurable via JSON: A dynamic config file is built from a JSON body in the ou
 
 
 🧠 Technical Overview
-
 🔹 Locators with Lambda Expressions
 This pattern defers element lookup until the element is actually needed:
 private IWebElement TBname => HelperMethods.FindElementWithWait_Clickable(_driver, By.Name("username"), TimeSpan.FromSeconds(10));
@@ -51,7 +44,6 @@ public static IWebElement FindElementWithWait_Clickable(IWebDriver webDriver, By
         return null;
     }
 }
-
 🔹 Reusable TestBase with Generic WebDriver
 Allows tests to be written once and run against multiple browsers:
 [TestFixture(typeof(ChromeDriver))]
