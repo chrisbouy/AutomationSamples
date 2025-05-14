@@ -12,13 +12,6 @@ Clone the repo:
 
 git clone https://github.com/chrisbouy/AutomationSamples.git  
 cd AutomationSamples/SeleniumProject  
-
-To clone just the Selenium_CSharp folder without downloading the entire repository:  
-
-git clone --filter=blob:none --no-checkout https://github.com/chrisbouy/AutomationSamples.git  
-cd AutomationSamples  
-git sparse-checkout init --cone  
-git sparse-checkout set Selenium_CSharp  
   
 Restore packages:    
 dotnet restore  
